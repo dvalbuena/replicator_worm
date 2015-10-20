@@ -221,7 +221,7 @@ def getHostsOnTheSameNetwork():
 	portScanner = nmap.PortScanner()
 	
 	#scan network for ssh port
-	portScanner.scan('192.168.10.0/24', arguments='-p 22 --open')
+	portScanner.scan('192.168.1.0/24', arguments='-p 22 --open')
 
 	#scan the network for host
 	hostInfo = portScanner.all_hosts()
